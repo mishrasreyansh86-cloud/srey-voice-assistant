@@ -6,17 +6,10 @@ import eel
 import keyboard
 import psutil
 
-from brain import JarvisBrain
-from core import CommandProcessor
-from notes import NotesManager
+from assistant import Assistant
 from voice import VoiceEngine
 
 app_instance = None
-
-NOTE_SAVE_TRIGGERS = ("remember", "take a note", "take note")
-NOTE_READ_TRIGGERS = ("read my notes", "what are my notes", "show my notes")
-NOTE_CLEAR_TRIGGERS = ("clear my notes", "delete my notes")
-NOTE_SEARCH_PREFIXES = ("search my notes for ", "find note ", "find notes ")
 
 
 def run_boot_sequence():
@@ -48,9 +41,7 @@ class JarvisApp:
         app_instance = self
 
         self.voice = VoiceEngine()
-        self.brain = JarvisBrain()
-        self.notes = NotesManager()
-        self.commands = CommandProcessor()
+        self.engine = Assistant()
         self._busy = threading.Lock()
         self._pending_command = None
         
@@ -80,29 +71,6 @@ class JarvisApp:
         self.voice.interrupt()
         _safe_ui(eel.set_ai_state, "LISTENING...")
 
-    def _local_response(self, command_text: str) -> str:
-        os_result = self.commands.execute(command_text)
-        if os_result:
-            return os_result
-
-        if any(trigger in command_text for trigger in NOTE_CLEAR_TRIGGERS):
-            return self.notes.clear_notes()
-
-        for prefix in NOTE_SEARCH_PREFIXES:
-            if command_text.startswith(prefix):
-                return self.notes.search_notes(command_text.replace(prefix, "", 1))
-
-        if any(trigger in command_text for trigger in NOTE_READ_TRIGGERS):
-            return self.notes.read_notes()
-
-        if any(trigger in command_text for trigger in NOTE_SAVE_TRIGGERS):
-            content = command_text
-            for phrase in ("remember that", "remember", "take a note", "take note"):
-                content = content.replace(phrase, "")
-            return self.notes.save_note(content.strip())
-
-        return ""
-
     def process_ai_response(self, user_text: str):
         user_text = (user_text or "").strip()
         if not user_text:
@@ -116,10 +84,7 @@ class JarvisApp:
         try:
             print(f"[Command] {user_text}")
             _safe_ui(eel.set_ai_state, "THINKING...")
-            command_text = user_text.lower()
-            response_text = self._local_response(command_text)
-            if not response_text:
-                response_text = self.brain.process_prompt(user_text)
+            response_text = self.engine.handle(user_text)
 
             _safe_ui(eel.set_ai_state, "SPEAKING...")
             _safe_ui(eel.display_ai_response, response_text)

@@ -7,6 +7,8 @@ import threading
 import time
 from pathlib import Path
 
+from brain import _read_env_file
+
 _MARKDOWN_RE = re.compile(r"[*#_`|~>-]+")
 _SPACE_RE = re.compile(r"\s+")
 
@@ -17,14 +19,7 @@ def _env(name: str, default: str) -> str:
 
 class VoiceEngine:
     def __init__(self):
-        env_path = Path(__file__).resolve().parent / ".env"
-        if env_path.is_file():
-            for raw in env_path.read_text(encoding="utf-8").splitlines():
-                line = raw.strip()
-                if not line or line.startswith("#") or "=" not in line:
-                    continue
-                key, _, value = line.partition("=")
-                os.environ[key.strip()] = value.strip().strip("'").strip('"')
+        _read_env_file(Path(__file__).resolve().parent / ".env")
 
         # North Indian / UP-style neural voice (Hindi). Swap to en-IN-PrabhatNeural for English-only.
         self.voice = _env("TTS_VOICE", "hi-IN-MadhurNeural")

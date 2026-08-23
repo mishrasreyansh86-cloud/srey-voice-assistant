@@ -67,13 +67,19 @@ app.mount("/", StaticFiles(directory=str(WEB), html=True), name="static")
 
 
 def run():
-    host = os.environ.get("WEB_HOST", "0.0.0.0")
+    host = os.environ.get("WEB_HOST", "127.0.0.1")
     port = int(os.environ.get("WEB_PORT", "8000"))
     print("\n" + "=" * 50)
     print(" SREY // NEURAL CORE 2.0 - WEB")
     print("=" * 50)
     print(f"[WEB] Open http://127.0.0.1:{port}")
-    print("[WEB] Phone on same Wi-Fi: http://<this-pc-ip>:" + str(port))
+    if host == "127.0.0.1":
+        print("[WEB] Phone access is disabled by default (security).")
+        print("[WEB] To allow it on your Wi-Fi, set WEB_HOST=0.0.0.0 in .env")
+        print("[WEB] WARNING: the API has no authentication. Only do this on a trusted network.")
+    else:
+        print("[WEB] Exposed to network (" + host + "). Phone: http://<this-pc-ip>:" + str(port))
+        print("[WEB] WARNING: no authentication - anyone on this network can control SREY.")
     print("=" * 50 + "\n")
 
     def _open():
