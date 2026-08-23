@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SREY // NEURAL CORE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body data-mode="idle">
+    <div id="fx-vignette"></div>
+    <div id="fx-grid"></div>
+    <div id="fx-scanlines"></div>
+    <div id="fx-sweep"></div>
+    <div id="fx-noise"></div>
+    <div id="shockwave"></div>
+
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+    <div class="edge-rail left-rail"></div>
+    <div class="edge-rail right-rail"></div>
+
+    <div class="reticle">
+        <span class="reticle-ring"></span>
+        <span class="reticle-ring delay"></span>
+        <span class="reticle-cross h"></span>
+        <span class="reticle-cross v"></span>
+    </div>
+
+    <div id="header-container">
+        <div class="brand-glitch" data-text="SREY // NEURAL CORE">
+            <h1 id="brand-title">SREY <span class="sub-brand">// NEURAL CORE</span></h1>
+        </div>
+        <div id="status-pill">
+            <span class="status-dot"></span>
+            <span id="status-tag">STANDBY // SAY "HEY SREY"</span>
+        </div>
+        <div id="uplink-row">UPLINK ENC-9 // NODE SREY-01 // LATENCY <span id="hud-ping">12</span>ms</div>
+    </div>
+
+    <div id="hud-clock-widget" class="hud-card">
+        <div class="widget-header">CHRONO_PROTOCOL.SYS</div>
+        <div id="hud-time">00:00:00</div>
+        <div id="hud-date">--/--/----</div>
+        <div class="mini-meta">TZ // LOCAL_CORE</div>
+    </div>
+
+    <div id="hud-telemetry-widget" class="hud-card">
+        <div class="widget-header">TELEMETRY_STREAM</div>
+        <div class="telemetry-row">
+            <span class="hud-label">CPU:</span>
+            <span id="hud-cpu" class="telemetry-val">0%</span>
+        </div>
+        <div class="telemetry-bar"><div id="cpu-fill" class="bar-fill"></div></div>
+        <div class="telemetry-row" style="margin-top:6px;">
+            <span class="hud-label">RAM:</span>
+            <span id="hud-ram" class="telemetry-val">0%</span>
+        </div>
+        <div class="telemetry-bar"><div id="ram-fill" class="bar-fill"></div></div>
+        <div class="telemetry-row" style="margin-top:8px;">
+            <span class="hud-label">NEURAL:</span>
+            <span id="hud-neural" class="telemetry-val">IDLE</span>
+        </div>
+        <div class="telemetry-bar"><div id="neural-fill" class="bar-fill neural"></div></div>
+    </div>
+
+    <div id="hud-signal-widget" class="hud-card">
+        <div class="widget-header">SIG_LOCK.WAV</div>
+        <div class="signal-bars">
+            <i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="mini-meta">MIC // <span id="sig-state">PASSIVE</span></div>
+    </div>
+
+    <div id="hex-column" class="hud-card">
+        <div class="widget-header">PACKET_DUMP</div>
+        <pre id="hex-dump"></pre>
+    </div>
+
+    <div id="subtitle-wrapper">
+        <div id="terminal-header">
+            <span>NEURAL TERMINAL</span>
+            <span class="term-id">CH-0 / VOICE-BUS</span>
+        </div>
+        <div id="live-caption">[SYS] Waiting for wake word: HEY SREY</div>
+        <canvas id="waveform-canvas" width="600" height="35"></canvas>
+    </div>
+
+    <div id="boot-footer">
+        <span>SREY INDUSTRIES © NEURAL CORE 2.0</span>
+        <span id="coord-line">X 00.000  Y 00.000  Z 06.500</span>
+        <span>PRESS CTRL+SPACE TO OVERRIDE</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
