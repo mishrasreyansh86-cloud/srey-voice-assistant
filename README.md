@@ -1,29 +1,69 @@
-# JARVIS AI Desktop Assistant 🎙️
+# 🤖 SREY — AI Voice Assistant
 
-A futuristic, modern, and multithreaded AI desktop assistant built with Python, CustomTkinter, and Google Gemini. 
+A futuristic desktop voice assistant built with Python that combines voice interaction, AI conversation, and desktop automation.
 
-JARVIS is designed to be a local voice assistant that helps you manage your PC, take notes, check the weather, and answer questions conversationally without freezing or locking up your system.
+### ✨ Features
 
-## 🌟 Features
-* **Modern Glassmorphism UI:** Built using CustomTkinter with a dark aesthetic.
-* **Conversational AI:** Powered by Google's `gemini-1.5-flash` for high-speed, contextual responses.
-* **Multithreaded Voice Engine:** Uses `speech_recognition` and `pyttsx3` running in the background so the GUI never freezes.
-* **Smart Notes:** Tell JARVIS to "remember" something, and it will save it with a timestamp.
-* **Desktop Automation:** Open everyday apps like Chrome, VS Code, and Notepad using your voice.
-* **Live System Telemetry:** Real-time updates on your CPU, RAM, and Battery usage.
-* **Weather Integration:** Get the current temperature and wind speed for any city instantly.
+* 🎙️ Real-time voice interaction
+* 🧠 AI-powered conversations (Gemini / Groq)
+* 💻 Desktop automation
+* 🔎 Smart web search
+* 📝 Notes & personal utilities
+* ⚡ Modular architecture
 
-## 🛠️ Prerequisites
-* Python 3.13 or higher installed and added to your system PATH.
-* An active microphone connected to your PC.
-* A free [Google Gemini API Key](https://aistudio.google.com/).
+---
+
+## 🛠️ Tech Stack
+
+* **Python**
+* **Eel**
+* **Google Gemini API**
+* **Groq API**
+* **VS Code**
+
+---
+
+## 📂 Project Structure
+
+```text
+srey-voice-assistant/
+├── main.py
+├── brain.py
+├── voice.py
+├── automation.py
+├── core.py
+├── notes.py
+├── web/
+├── requirements.txt
+└── .gitignore
+```
+
+---
 
 ## 🚀 Installation
 
-1. **Clone or Download the Repository:**
-   Open your terminal and navigate to the project folder.
+```bash
+git clone https://github.com/mishrasreyansh86-cloud/srey-voice-assistant.git
 
-2. **Create a Virtual Environment (Recommended):**
-   ```bash
-   python -m venv venv
-   .\venv\Scripts\activate
+cd srey-voice-assistant
+
+pip install -r requirements.txt
+
+python main.py
+```
+
+---
+
+## 📌 Status
+
+Currently under active development as a first-year Computer Science project.
+
+New features are added regularly.
+
+---
+
+## 👨‍💻 Author
+
+**Sreyansh Mishra**
+
+First-Year B.Tech CSE • GLA University, Mathura
